@@ -29,11 +29,18 @@ class MainActivity : AppCompatActivity() {
 
 //        loadWebpage()
 
-        button.setOnClickListener {
              // SharedPreferencesの練習
 //            sp.edit().putString("DataString", "sample")
 
 //            startActivity(share)
+
+        // Fragmentの練習
+
+        fragmentbutton.setOnClickListener{
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.add(R.id.fragment_layout, WebViewFragment.createInstance())
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
 
         readButton.setOnClickListener {
@@ -91,6 +98,18 @@ class MainActivity : AppCompatActivity() {
 //
 //            builder.setType("text/plain")
 //            builder.startChooser()
+        }
+        var sheepCount = 0
+        changeImageButton.setOnClickListener{
+
+            sheepCount++
+            val sheepText = "ひつじが$sheepCount 匹"
+            sheepTextView.text = sheepText
+
+            when(sheepCount % 2) {
+                0 -> imageView1.setImageResource(R.drawable.sheep1)
+                else -> imageView1.setImageResource(R.drawable.sheep2)
+            }
         }
     }
 
